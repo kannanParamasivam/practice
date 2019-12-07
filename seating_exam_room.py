@@ -26,11 +26,11 @@ class ExamRoom:
             for i in range(1, len(self.students)):
                 
                 if self.students[0] != 0:
-                    d = floor((self.students[0] - 0)/2)
+                    d = (self.students[0] - 0)
 
                     if d > distance:
                         distance = d
-                        student = self.students[i] + distance
+                        student = 0
 
                 d = floor((self.students[i] - self.students[i-1])/2) # calculate the distance
 
@@ -39,10 +39,10 @@ class ExamRoom:
                     student = self.students[i-1] + distance
 
                 if i == len(self.students) - 1 and self.students[i] != self.capacity - 1:
-                    d = floor((self.capacity - 1) - (self.students[i]) / 2)
+                    d = floor((self.capacity - 1) - (self.students[i]))
                     if d > distance:
                         distance = d
-                        student = self.students[i] + distance
+                        student = self.capacity - 1
                     
             bisect.insort(self.students, student)
             return student
@@ -53,20 +53,14 @@ class ExamRoom:
             self.students.remove(p)
 
 
-# Your ExamRoom object will be instantiated and called as such:
+# [null,0,9,4,null,null,0,4,2,6,1,3,5,7,8,null]
 
-# seat() -> 0, no one is in the room, then the student sits at seat number 0.
-# seat() -> 9, the student sits at the last seat number 9.
-# seat() -> 4, the student sits at the last seat number 4.
-# seat() -> 2, the student sits at the last seat number 2.
-# leave(4) -> null
-# seat() -> 5, the student sits at the last seat number 5.
+ops = ["seat","seat","seat","leave","leave","seat","seat","seat","seat","seat","seat","seat","seat","seat","leave"]
 
-ops = ["seat", "seat", "seat", "seat", "leave", "seat"]
 exam_room = ExamRoom(10)
 
 for op in ops:
     if op is "seat":
         print(exam_room.seat())
     elif op is "leave":
-        print(exam_room.leave(4))
+        print(exam_room.leave(9))
